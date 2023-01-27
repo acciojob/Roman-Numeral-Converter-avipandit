@@ -1,27 +1,73 @@
-function integer_to_roman(num) {
-if (typeof num !== 'number') 
-return false; 
+function convertToRoman(num) {
+  	const obj = {
+      0:['M',1000], 
+      1:['D', 500], 
+      2:['C', 100], 
+      3:['L', 50], 
+      4:['X', 10], 
+      5:['V', 5], 
+      6:['I', 1]
+    };
 
-var digits = String(+num).split(""),
-key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
-"","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
-"","I","II","III","IV","V","VI","VII","VIII","IX"],
-roman_num = "",
-i = 3;
-while (i--)
-roman_num = (key[+digits.pop() + (i * 10)] || "") + roman_num;
-return Array(+digits.join("") + 1).join("M") + roman_num;
+ let result = "";
+   while(num){
+      if(num>=1000){
+         result += "M";
+         num -= 1000;
+      }else if(num>=500){
+         if(num>=900){
+            result += "CM";
+            num -= 900;
+         }else{
+            result += "D";
+            num -= 500;
+         }
+         }else if(num>=100){
+            if(num>=400){
+               result += "CD";
+               num -= 400;
+            }else{
+               result += "C";
+               num -= 100;
+            }
+         }else if(num>=50){
+            if(num>=90){
+               result += "XC";
+               num -= 90;
+            }else{
+               result += "L";
+               num -= 50;
+            }
+         }else if(num>=10){
+            if(num>=40){
+               result += "XL";
+               num -= 40;
+            }else{
+               result += "X";
+               num -= 10;
+            }
+         }else if(num>=5){
+            if(num>=9){
+               result += "IX";
+               num -= 9;
+           }else{
+               result += "V";
+               num -= 5;
+            }
+         }else{
+            if(num>=4){
+               result += "IV";
+               num -= 4;
+         }else{
+            result += "I";
+            num -= 1;
+         }
+      }
+   }
+   return result;
 }
-  
 
-
-
-// You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
-
-console.log(integer_to_roman(36));
-
-
-
+// console.log(convertToRoman(36));
 
 // do not edit below this line
 module.exports = convertToRoman
